@@ -6,3 +6,42 @@
     - name: Print URL
       ansible.builtin.debug:
         msg: URL == {{ URL }}
+
+- name: Demo on Play var files
+  hosts: all
+  vars_files: demo-vars.yml
+  tasks:
+    - name: Print URL
+      ansible.builtin.debug:
+        msg: '{{ URL }}'
+
+
+- name: Demo on task level variables
+  hosts: all
+  tasks:
+    - name: Print URL
+      ansible.builtin.debug:
+        msg: URL == {{ URL }}
+      #vars_files:
+      vars:
+        URL: task.example.com
+### Note: task level variables are limited to only that task.
+#
+- name: Read the variable from inventory file
+  hosts: all
+  tasks:
+    - name: Print URL
+      ansible.builtin.debug:
+        msg: URL == {{ URL }}
+
+- name: Variable from CLI
+  hosts: all
+  tasks:
+    - name: Print URL
+      ansible.builtin.debug:
+        msg: URL == {{ URL }}
+
+- name: Variable from Roles
+  hosts: all
+  roles:
+    - sample
