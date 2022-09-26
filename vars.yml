@@ -62,4 +62,8 @@
 
       - name: Print Output
         ansible.builtin.debug:
-         msg: "{{SHELL_OUTPUT.failed}}"
+         msg: "{{SHELL_OUTPUT.stdout}}"
+
+      - name: Declare a variable
+        ansible.builtin.set_fact:
+            UPTIME: "{{SHELL_OUTPUT.stdout}}"
